@@ -39,6 +39,15 @@ class Redvine
     end
   end
 
+  def me(opts={})
+    get_request_data('users/me', opts, false)
+  end
+
+  def search_user(username, opts={})
+    raise(ArgumentError, 'You must specify a username') if !username
+    get_request_data("users/search/#{username}", opts)
+  end
+
   def search(tag, opts={})
     raise(ArgumentError, 'You must specify a tag') if !tag
     get_request_data('timelines/tags/' + tag, opts)
